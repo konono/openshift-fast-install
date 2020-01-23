@@ -48,3 +48,26 @@ reboot
 :exit
 exit
 
+:config
+config
+goto start
+
+:back
+set submenu-timeout 0
+clear submenu-default
+goto start
+
+:bootstrap
+kernel  http://172.16.1.1:8000/ipxe/rhcos-4.2.0-x86_64-installer-kernel ip=dhcp rd.neednet=1 initrd=http://172.16.1.1:8000/ipxe/rhcos-4.2.0-x86_64-installer-initramfs.img console=tty0 console=ttyS0 coreos.inst=yes coreos.inst.install_dev=vda coreos.inst.image_url=http://172.16.1.1:8000/ocp/rhcos/images/latest/bios.raw.gz coreos.inst.ignition_url=http://172.16.1.1:8000/ocp/rhcos/ignitions/bootstrap.ign
+initrd http://172.16.1.1:8000/ipxe/rhcos-4.2.0-x86_64-installer-initramfs.img
+boot
+
+:master
+kernel  http://172.16.1.1:8000/ipxe/rhcos-4.2.0-x86_64-installer-kernel ip=dhcp rd.neednet=1 initrd=http://172.16.1.1:8000/ipxe/rhcos-4.2.0-x86_64-installer-initramfs.img console=tty0 console=ttyS0 coreos.inst=yes coreos.inst.install_dev=vda coreos.inst.image_url=http://172.16.1.1:8000/ocp/rhcos/images/latest/bios.raw.gz coreos.inst.ignition_url=http://172.16.1.1:8000/ocp/rhcos/ignitions/master.ign
+initrd http://172.16.1.1:8000/ipxe/rhcos-4.2.0-x86_64-installer-initramfs.img
+boot
+
+:worker
+kernel  http://172.16.1.1:8000/ipxe/rhcos-4.2.0-x86_64-installer-kernel ip=dhcp rd.neednet=1 initrd=http://172.16.1.1:8000/ipxe/rhcos-4.2.0-x86_64-installer-initramfs.img console=tty0 console=ttyS0 coreos.inst=yes coreos.inst.install_dev=vda coreos.inst.image_url=http://172.16.1.1:8000/ocp/rhcos/images/latest/bios.raw.gz coreos.inst.ignition_url=http://172.16.1.1:8000/ocp/rhcos/ignitions/worker.ign
+initrd http://172.16.1.1:8000/ipxe/rhcos-4.2.0-x86_64-installer-initramfs.img
+boot
